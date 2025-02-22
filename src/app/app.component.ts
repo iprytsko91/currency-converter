@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrencyService } from "./services/currency.service";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private cur: CurrencyService) {
+    this.cur.getRates().subscribe(res => {
+      console.log(res)
+    })
+  }
 }
