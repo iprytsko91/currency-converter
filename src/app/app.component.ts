@@ -8,9 +8,10 @@ import { CurrencyService } from "./services/currency.service";
   standalone: false,
 })
 export class AppComponent {
+
   constructor(private cur: CurrencyService) {
-    this.cur.getRates().subscribe(res => {
-      console.log(res)
-    })
+    // this.cur.getRates().subscribe(res => {
+    //   console.log(res)
+    // })
   }
 }

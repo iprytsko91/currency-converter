@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { IonicModule } from "@ionic/angular";
 
 import { AuthorizationComponent } from "./authorization.component";
 import { AuthorizationRoutingModule } from "./authorization-routing.module";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
+import { FormsModule } from "@angular/forms";
 
 
 const Components = [
@@ -18,7 +20,10 @@ const Components = [
   declarations: [...Components],
   imports: [
     CommonModule,
-    AuthorizationRoutingModule
+    AuthorizationRoutingModule,
+    IonicModule,
+    NgOptimizedImage,
+    FormsModule
   ]
 })
 export class AuthorizationModule {

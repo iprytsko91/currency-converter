@@ -9,17 +9,20 @@ const routes: Routes = [
   {
     path: '',
     component: AuthorizationComponent,
-  },
-  {
-    path: 'sign-up',
-    component: SignUpComponent,
     // canActivate
+    children: [
+      {
+        path: 'sign-in',
+        component: SignInComponent,
+        // canActivate
+      },
+      {
+        path: 'sign-up',
+        component: SignUpComponent,
+        // canActivate
+      },
+    ]
   },
-  {
-    path: 'sign-in',
-    component: SignInComponent,
-    // canActivate
-  }
 ];
 
 @NgModule({

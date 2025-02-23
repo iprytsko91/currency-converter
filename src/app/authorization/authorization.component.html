@@ -1,4 +1,14 @@
-<p>
-  authorization works!
-</p>
-
+<ion-content class="ion-padding" scroll-y="false">
+  <ion-grid class="full-height">
+    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
+      <ion-col size="12" size-md="6" class="auth-content ion-text-center">
+        <img ngSrc="{{imagePath}}" alt="Currency Converter" [height]="200" [width]="200" priority/>
+        <div *ngIf="showAuthActions" class="actions">
+          <ion-button expand="block" [routerLink]="'sign-in'">Sign In</ion-button>
+          <ion-button expand="block" color="light" [routerLink]="'sign-up'">Sign Up</ion-button>
+        </div>
+        <router-outlet></router-outlet>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
