@@ -9,10 +9,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'message/:id',
-    loadChildren: () => import('./view-message/view-message.module').then(m => m.ViewMessagePageModule)
+    // TODO: auth verification
   },
   {
     path: '',

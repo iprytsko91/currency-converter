@@ -1,18 +1,24 @@
 <div class="sign-in-container">
-  <ion-item>
-    <ion-label position="fixed">Email</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="fixed">Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
+  <form [formGroup]="form" (ngSubmit)="signIn()">
+    <ion-item>
+      <ion-label position="fixed">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
 
-  <ion-button expand="block" (click)="signIn()">Sign In</ion-button>
+    <ion-button expand="block"
+                type="submit"
+                [disabled]="!form.valid">
+      Sign In
+    </ion-button>
 
-  <span class="help-block">Don't have an account go to
+    <span class="help-block">Don't have an account go to
     <a [routerLink]="'../sign-up'" class="ion-link">
       Sign Up
     </a>
   </span>
+  </form>
 </div>

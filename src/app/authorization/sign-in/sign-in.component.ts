@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { EmailPattern } from "../../constants";
 
 @Component({
   selector: 'app-sign-in',
@@ -7,12 +9,25 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class SignInComponent implements OnInit {
+  form!: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+  }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   signIn() {
+    if (this.form.valid) {
+      alert("Sign In");
+    }
+  }
 
+  private initForm(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(EmailPattern)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    })
   }
 }

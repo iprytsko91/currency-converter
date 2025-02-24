@@ -1,3 +1,5 @@
+import { CurrencyCode } from "./currency-code.enum";
+
 export type Currencies = {
-  [currencyCode: string]: number;
+  [currencyCode in CurrencyCode]: number;
 }

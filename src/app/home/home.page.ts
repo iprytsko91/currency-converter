@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RefresherCustomEvent } from '@ionic/angular';
+import { Component } from '@angular/core';
 
-import { DataService, Message } from '../services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +8,11 @@ import { DataService, Message } from '../services/data.service';
   standalone: false,
 })
 export class HomePage {
-  private data = inject(DataService);
+  userName: string = 'Ivan Prytsko';
+  imagePath: string = 'assets/img/currency-converter-logo.webp';
   constructor() {}
 
-  refresh(ev: any) {
-    setTimeout(() => {
-      (ev as RefresherCustomEvent).detail.complete();
-    }, 3000);
-  }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  logout() {
+    console.log('Logging out...');
   }
 }

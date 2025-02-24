@@ -1,0 +1,10 @@
+<div class="history-container">
+  <ion-list>
+    <ion-list-header>History</ion-list-header>
+    @for (item of items; track item) {
+      <ion-item>
+        {{ getHistoryItemString(item) }}
+      </ion-item>
+    }
+  </ion-list>
+</div>
