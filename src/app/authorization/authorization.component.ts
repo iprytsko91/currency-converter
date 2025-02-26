@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from "@ionic/angular";
+import { Component } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { filter, tap } from "rxjs";
 
@@ -9,7 +8,7 @@ import { filter, tap } from "rxjs";
   styleUrls: ['./authorization.component.scss'],
   standalone: false
 })
-export class AuthorizationComponent implements OnInit {
+export class AuthorizationComponent {
   imagePath: string = 'assets/img/currency-converter.webp'
   showAuthActions: boolean = true;
 
@@ -23,15 +22,4 @@ export class AuthorizationComponent implements OnInit {
       )
       .subscribe();
   }
-
-  ngOnInit() {
-  }
-
-  // signIn(): void {
-  //   this.navController.navigateForward('sign-in', {
-  //     animated: true,
-  //     animationDirection: 'forward',
-  //   });
-  // }
-
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
@@ -13,8 +13,7 @@ import { ConverterComponent } from "./converter/converter.component";
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    NgOptimizedImage,
+    HomePageRoutingModule
   ],
   declarations: [HomePage, ConverterComponent, HistoryComponent],
 })

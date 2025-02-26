@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
 import { EmailPattern } from "../../constants";
+import { AuthService } from "../../services";
 
 @Component({
   selector: 'app-sign-in',
@@ -11,16 +14,28 @@ import { EmailPattern } from "../../constants";
 export class SignInComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  signIn() {
+  async signIn() {
     if (this.form.valid) {
-      alert("Sign In");
+      const { email, password } = this.form.getRawValue();
+      try {
+        const user = await this.authService.signIn({ email, password });
+
+        if (user) {
+          this.router.navigate(['/']);
+        }
+
+      } catch (err) {
+        alert(err)
+      }
     }
   }
 

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { ApiKey, BaseCurrency, CurrenciesApi, DefaultCurrencies } from "../constants";
-import { Currencies, CurrenciesResponse } from "../models";
+import { ApiKey, CurrenciesApi } from "../constants";
+import { Currencies, CurrenciesResponse, CurrencyCode, CurrencyConvertResult } from "../models";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,24 @@ import { Currencies, CurrenciesResponse } from "../models";
 export class CurrencyService {
 
   constructor(private http: HttpClient) {
-
   }
 
-  getRates(baseCurrency: string = BaseCurrency, currencies: string[] = DefaultCurrencies): Observable<Currencies> {
+  convert(amount: number, baseCurrency: CurrencyCode, currencyTo: CurrencyCode): Observable<CurrencyConvertResult> {
+    return this.getRates(baseCurrency, [currencyTo])
+      .pipe(
+        map((currencies: Currencies) => +(amount * currencies[currencyTo]).toFixed(3)),
+        map((convertedAmount) => {
+          return new CurrencyConvertResult({
+            baseCurrency: baseCurrency,
+            baseAmount: amount,
+            convertedCurrency: currencyTo,
+            convertedAmount: convertedAmount,
+          });
+        })
+      )
+  }
+
+  private getRates(baseCurrency: string, currencies: string[]): Observable<Currencies> {
     return this.http.get<CurrenciesResponse>(CurrenciesApi, {
       params: {
         apikey: ApiKey,

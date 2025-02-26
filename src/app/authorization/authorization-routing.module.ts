@@ -9,17 +9,14 @@ const routes: Routes = [
   {
     path: '',
     component: AuthorizationComponent,
-    // canActivate
     children: [
       {
         path: 'sign-in',
         component: SignInComponent,
-        // canActivate
       },
       {
         path: 'sign-up',
         component: SignUpComponent,
-        // canActivate
       },
     ]
   },

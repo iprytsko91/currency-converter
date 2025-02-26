@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard, NotAuthGuard } from "./services/guards";
+
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./authorization/authorization.module').then(m => m.AuthorizationModule)
+    loadChildren: () => import('./authorization/authorization.module').then(m => m.AuthorizationModule),
+    canActivate: [NotAuthGuard],
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-    // TODO: auth verification
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '',

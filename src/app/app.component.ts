@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CurrencyService } from "./services/currency.service";
+import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,11 @@ import { CurrencyService } from "./services/currency.service";
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private storage: Storage) {
+  }
 
-  constructor(private cur: CurrencyService) {
-    // this.cur.getRates().subscribe(res => {
-    //   console.log(res)
-    // })
+  async ngOnInit() {
+    await this.storage.create();
   }
 }

@@ -1,32 +1,31 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from "@ngxs/store";
+import { Observable } from "rxjs";
 
-import { ConvertedCurrency, CurrencyCode } from "../../models";
+import { CurrencyConvertResult } from "../../models";
+import { HomeState } from "../store/home.state";
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
-  standalone: false
+  standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HistoryComponent {
+  history$: Observable<CurrencyConvertResult[]> = this.store.select(HomeState.history);
 
-  // TODO via store
-  @Input() public items: ConvertedCurrency[] = [
-    new ConvertedCurrency({
-      baseCurrency: CurrencyCode.USD,
-      baseAmount: 1,
-      convertedCurrency: CurrencyCode.EUR,
-      convertedAmount: 0.55
-    }),
-    new ConvertedCurrency({
-      baseCurrency: CurrencyCode.USD,
-      baseAmount: 1,
-      convertedCurrency: CurrencyCode.EUR,
-      convertedAmount: 0.55
-    })
-  ];
+  getHistoryItemString(item: CurrencyConvertResult): string {
+    return `${this.getDateTime(item.date)}: ${item.baseAmount} ${item.baseCurrency} -> ${item.convertedAmount} ${item.convertedCurrency}`;
+  }
 
-  getHistoryItemString(item: ConvertedCurrency): string {
-    return `${item.baseAmount} ${item.baseCurrency} -> ${item.convertedAmount} ${item.convertedCurrency}`;
+  getDateTime(date: Date): string {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  constructor(private store: Store) {
   }
 }

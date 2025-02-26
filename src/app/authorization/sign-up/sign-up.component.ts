@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import { EmailPattern } from "../../constants";
+import { AuthService } from "../../services";
 
 @Component({
   selector: 'app-sign-up',
@@ -12,16 +14,29 @@ import { EmailPattern } from "../../constants";
 export class SignUpComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  signUp() {
+  async signUp() {
     if (this.form.valid) {
-      alert("Sign Up");
+      const { name, email, password } = this.form.getRawValue();
+
+      try {
+        const result = await this.authService.signUp({ name, email, password });
+
+        if (result) {
+          alert('User has been registered. Use Sign In to continue.');
+          this.router.navigate(['/auth']);
+        }
+      } catch (err) {
+        alert(err);
+      }
     }
   }
 
